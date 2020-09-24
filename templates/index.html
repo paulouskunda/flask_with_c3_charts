@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask with C3.js</title>
+    <script src="{{ url_for('static',   filename='c3/c3.min.js')}}"></script>
+    <script src="{{ url_for('static',   filename='c3/d3.js')}}"></script>
+    <link href="{{ url_for('static',   filename='c3/c3.css')}}" rel="stylesheet"/>
+</head>
+<body>
+<h2>Goods over time</h2>
+<div id="chart"></div>
+
+<script>
+
+    var chart = c3.generate({
+    data: {
+        x: 'date',
+        url: '/provideCSV',
+        type: 'line',
+        groups: [
+            ['good_condition', 'acceptable_condition', 'bad_condition', 'total_received']
+        ]
+    },
+    axis : {
+        x : {
+            type : 'timeseries',
+            tick : {
+              format : "%y/%m/%d"
+            }
+        }
+    }
+});
+</script>
+</body>
+</html>
